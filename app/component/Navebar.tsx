@@ -8,17 +8,17 @@ import iconencode from "public/encode.svg";
 import icontext from "public/TextToImage.svg";
 import iconarrow from "public/arrow_left.svg";
 import { useState } from "react";
-import { UserAuth } from "../context/AuthContext";
+
 
 function Navebar() {
-  const { user, googleSignIn, logOut } = UserAuth();
-  const handleSignIn = async () => {
-    try {
-      await googleSignIn();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const { user, googleSignIn, logOut } = UserAuth();
+  // const handleSignIn = async () => {
+  //   try {
+  //     await googleSignIn();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const sidebarItem = [
     {

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Spinner } from "@nextui-org/react";
-function Page() {
+function Decode() {
   const [selectedEncodeImage, setSelectedEncodeImage] = useState(null);
   const [DecodeImage, setDecodeImage] = useState<string | null>(null);
   const [isfinished, setisfinished] = useState(false);
@@ -141,4 +141,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Decode;

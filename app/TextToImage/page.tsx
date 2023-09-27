@@ -2,7 +2,7 @@
 import html2canvas from "html2canvas";
 import React, { useRef, useState } from "react";
 
-export default function Encode() {
+export default function TextToImage() {
   const [text, setText] = useState("");
   const [hostImage, setHostImage] = useState(null);
   const [textPosition, setTextPosition] = useState<Number>(1);

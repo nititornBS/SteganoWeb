@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Spinner } from "@nextui-org/react";
-function Decode() {
+function Encode() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedHiddenImage, setSelectedHiddenImage] = useState(null);
   const [encodedImage, setEncodedImage] = useState<string | null>(null);
@@ -187,4 +187,4 @@ function Decode() {
   );
 }
 
-export default Decode;
+export default Encode;
