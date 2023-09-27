@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Logo from "public/Logo.png";
+import Logo from "public/logo.png";
 import Link from "next/link";
 import icondecode from "@/public/decode.svg";
 import iconencode from "public/encode.svg";
