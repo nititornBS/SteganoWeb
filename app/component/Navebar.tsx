@@ -32,7 +32,7 @@ function Navebar() {
       icon: iconencode,
     },
     {
-      name: "Text-To-Image",
+      name: "Text-to-Image",
       href: "/TextToImage",
       icon: icontext,
     },

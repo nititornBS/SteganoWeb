@@ -19,7 +19,7 @@ function page() {
       icon: iconencode,
     },
     {
-      name: "Text-To-image",
+      name: "Text-to-Image",
       href: "/TextToImage",
       icon: icontext,
     },
@@ -34,7 +34,7 @@ function page() {
 
           <div className="flex flex-col justify-center items-center">
             <div className=" text-[25px] text-center lg:text-[70px] flex items-center ">
-              Wellcome to Stegano
+              Welcome to Stegano
             </div>
             <div className="w-[100%]">
               <ul className="mx-5 gap-5 flex pt-8 justify-evenly">
