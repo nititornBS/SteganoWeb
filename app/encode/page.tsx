@@ -75,7 +75,7 @@ function Encode() {
   const handleSaveImage = () => {
     const a = document.createElement("a");
     a.href = encodedImage!;
-    a.download = "edited-image.png";
+    a.download = "stago-image.png";
     a.click();
   };
 
@@ -86,14 +86,14 @@ function Encode() {
       </div>
       <div className=" h-[90%]   flex-col lg:flex lg:flex-row bg-encodeThemedetail overflow-auto">
         <div className="w-[100%] h-[100%] flex flex-col lg:w-[40%]  items-center justify-center  py-5">
-          <div className="flex flex-col w-[80%] h-[90%] bg-encodeTheme rounded-2xl drop-shadow-2xl">
-            <div className=" text-center text-xl my-5 ">Select Your images</div>
+          <div className="flex flex-col w-[80%] h-[95%] bg-encodeTheme rounded-2xl drop-shadow-2xl">
+            <div className=" text-center text-xl my-5 ">Select your images</div>
             <div className="h-[50%]  flex flex-col items-center">
               <div className="flex flex-col h-[95%] w-[80%] items-center bg-white rounded-md  drop-shadow-lg">
                 <div className=" text-center my-2 text-xl">Cover Image</div>
                 <div className="w-[90%] h-[100%] m-3 flex flex-col ">
                   {selectedCoverImage && (
-                    <div className="flex justify-center  my-auto">
+                    <div className="flex justify-center w-full h-full my-auto">
                       <img
                         src={URL.createObjectURL(selectedCoverImage)}
                         alt="Sele cted Image"
@@ -114,9 +114,9 @@ function Encode() {
             <div className="h-[50%] flex flex-col items-center">
               <div className=" h-[95%]  w-[80%] flex flex-col items-center bg-white  rounded-md drop-shadow-lg">
                 <div className=" text-center my-2  text-lg">Hidden Image</div>
-                <div className="w-[90%] h-[100%]  justify-center  ">
+                <div className="w-[90%] h-[100%] m-3 flex flex-col  ">
                   {selectedHiddenImage && (
-                    <div className="mt-3 flex w-[100%] justify-center">
+                    <div className=" flex w-full h-full justify-center">
                       <img
                         src={URL.createObjectURL(selectedHiddenImage)}
                         alt="Selected Image"

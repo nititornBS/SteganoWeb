@@ -95,7 +95,7 @@ function Navebar() {
       </div>
       <div className={istogle?"hidden":"h-[20%]  flex items-center  justify-around w-[100%]"}>
         <button className=" bg-slate-400 p-1 w-[40%] h-[20%] ">Login</button>
-        <button className=" bg-slate-400 p-1 w-[40%] h-[20%]">logOut</button>
+        {/* <button className=" bg-slate-400 p-1 w-[40%] h-[20%]">logOut</button> */}
       </div>
     </aside>
   );

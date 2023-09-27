@@ -17,7 +17,7 @@ function Decode() {
     console.log("saved image.");
     const a = document.createElement("a");
     a.href = DecodeImage!;
-    a.download = "edited-image.png";
+    a.download = "recovered-image.png";
     a.click();
   };
 
@@ -77,7 +77,7 @@ function Decode() {
         <div className="w-[100%] h-[70%] lg:w-[50%] lg:h-[100%]   items-center flex flex-col justify-center">
           <div className="flex flex-col bg-DecodeTheme drop-shadow-2xl  h-[80%]   rounded-xl items-center w-[90%]">
             <div className=" text-center py-4 text-2xl">
-              Please select the encode image
+              Please select the encoded image
             </div>
             <div className=" border-2 w-[70%] h-[60%] bg-white drop-shadow-xl flex items-center justify-center">
               {selectedEncodeImage && (
@@ -96,18 +96,13 @@ function Decode() {
               onChange={handletheEncodeimage}
               className="block  mt-3 w-[40%] text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 "
             />
-            <div
-              className="h-[7%] m-auto w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700"
-              onClick={handleSubmit}
-            >
-              <button>decode</button>
-            </div>
+            
           </div>
         </div>
         <div className=" flex h-[100%]  drop-shadow-2xl w-[100%] lg:w-[40%] justify-center items-center">
           <div className=" w-[90%] lg:w-[100%] h-[80%] items-center flex flex-col rounded-2xl  bg-DecodeTheme">
-            <div className=" h-[15%] lg:h-[10%] w-[40 %] py-5   text-center text-xl flex justify-center  ">
-              Waitting a moment for the result above
+            <div className=" h-[15%] lg:h-[10%] w-[40 %] items-center text-2xl flex justify-center ">
+              Click the Decode button
             </div>
             <div className=" border-2 w-[75%]  justify-center items-center bg-white drop-shadow-xl h-[60%] flex">
             {isloading ? (
@@ -125,6 +120,12 @@ function Decode() {
                 </div>
               )}
             </div>
+            {isfinished ? null : <div
+              className="h-[7%] m-auto w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700"
+              onClick={handleSubmit}
+            >
+              <button>Decode</button>
+            </div>}
             {isfinished ? (
               <button
                 id="encodeButton"

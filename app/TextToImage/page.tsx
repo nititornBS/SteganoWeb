@@ -54,7 +54,7 @@ export default function TextToImage() {
   return (
     <div className="h-screen w-full overflow-auto">
       <div className="flex h-[10%] bg-blue-400 items-center">
-        <div className="flex text-2xl ml-5">Text to Image </div>
+        <div className="flex text-2xl ml-5">Text-to-Image </div>
       </div>
       <div className="flex h-[90%] w-[100%] flex-col lg:flex-row bg-blue-200 overflow-auto">
         <div className=" w-[100%] h-full lg:w-[30%] flex justify-around items-center flex-col">
@@ -77,7 +77,7 @@ export default function TextToImage() {
             />
           </div>
           <div className="h-[40%] w-[70%] border-2 flex flex-col items-center bg-blue-400 rounded-2xl ">
-            <div className="mt-2 text-xl"> Select the layout of Text</div>
+            <div className="mt-2 text-xl"> Select the layout of text</div>
             <div className=" grid w-[100%] h-[100%] grid-cols-2">
               <div className="flex justify-center items-center">
                 <button
