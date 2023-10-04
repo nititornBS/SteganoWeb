@@ -282,7 +282,7 @@ function Encode() {
                     <img
                       src={encodedImage}
                       alt="Encoded Image"
-                      className=" image high-quality max-w-[95%] max-h-[95%] border border-red-400   "
+                      className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400   "
                     />
                   </div>
                 )}
