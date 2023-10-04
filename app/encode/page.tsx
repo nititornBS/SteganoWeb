@@ -271,6 +271,14 @@ function Encode() {
 
                 {encodedImage && (
                   <div className=" flex h-[100%] items-center justify-center">
+                    <style> 
+                    .pixelated {
+                      image-rendering: pixelated;
+                    }
+                    .high-quality {
+                      image-rendering: high-quality;
+                    }
+                    </style>
                     <img
                       src={encodedImage}
                       alt="Encoded Image"
