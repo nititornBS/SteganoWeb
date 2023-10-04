@@ -152,7 +152,7 @@ function Encode() {
 
       // Check if the temporary image URL is valid
       if (temporaryImageUrl) {
-        setTextStatus("send the Image to server...");
+        setTextStatus("send the image to server...");
         // Set the image URL to the state variable
         setEncodedImage(temporaryImageUrl);
         setIsloading(false);
@@ -160,7 +160,7 @@ function Encode() {
       }
       console.log(imageBlob);
       console.log(imageUrl);
-      resizeImage(temporaryImageUrl,test,300,300)
+     // resizeImage(temporaryImageUrl,test,300,300)
      
       alert("Images processed successfully!");
     } catch (error) {
@@ -215,7 +215,7 @@ function Encode() {
                     <div className="flex justify-center items-center w-full h-full my-auto">
                       <img
                         src={URL.createObjectURL(selectedCoverImage)}
-                        alt="Sele cted Image"
+                        alt="Selected Image"
                         className="max-w-[200px] max-h-[150px] border  border-red-400"
                       />
                     </div>
@@ -274,7 +274,7 @@ function Encode() {
                     <img
                       src={encodedImage}
                       alt="Encoded Image"
-                      className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400   "
+                      className=" image pixelated max-w-[95%] max-h-[95%] border border-red-400   "
                     />
                   </div>
                 )}
