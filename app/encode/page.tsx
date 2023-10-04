@@ -275,6 +275,9 @@ function Encode() {
                     .pixelated {
                       image-rendering: pixelated;
                     }
+                    .smooth {
+                      image-rendering: smooth;
+                    }
                     .high-quality {
                       image-rendering: high-quality;
                     }
@@ -282,7 +285,7 @@ function Encode() {
                     <img
                       src={encodedImage}
                       alt="Encoded Image"
-                      className=" image pixelated max-w-[95%] max-h-[95%] border border-red-400   "
+                      className=" image smooth max-w-[95%] max-h-[95%] border border-red-400   "
                     />
                   </div>
                 )}
