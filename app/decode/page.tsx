@@ -108,7 +108,7 @@ function Decode() {
             </div>
             <div className=" border-2 w-[75%]  justify-center items-center bg-white drop-shadow-xl h-[60%] flex">
             {isloading ? (
-                  <div className=" w-full h-full flex items-center justify-center">
+                  <div className=" w-full h-full flex-col flex items-center justify-center">
                     <Spinner />
                     <div>{textstetus}</div>
                   </div>
