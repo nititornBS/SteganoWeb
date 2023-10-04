@@ -7,18 +7,37 @@ import icondecode from "@/public/decode.svg";
 import iconencode from "public/encode.svg";
 import icontext from "public/TextToImage.svg";
 import iconarrow from "public/arrow_left.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UserAuth } from "../context/AuthContext";
 
 
 function Navebar() {
   // const { user, googleSignIn, logOut } = UserAuth();
+  // const [loading, setLoading] = useState(true);
+
   // const handleSignIn = async () => {
   //   try {
   //     await googleSignIn();
-  //   } catch (err) {
-  //     console.log(err);
+  //   } catch (error) {
+  //     console.log(error);
   //   }
   // };
+
+  // const handleSignOut = async () => {
+  //   try {
+  //     await logOut();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const checkAuthentication = async () => {
+  //     await new Promise((resolve) => setTimeout(resolve, 50));
+  //     setLoading(false);
+  //   };
+  //   checkAuthentication();
+  // }, [user]);
 
   const sidebarItem = [
     {
@@ -45,7 +64,7 @@ function Navebar() {
   return (
     
     <aside
-      className="flex flex-col w-[10%] h-screen border-2 border-gray-500 gap-1 justify-between transition--all duration-500"
+      className="flex flex-col w-[10%] h-screen border-2 border-gray-500 gap-1 justify-between transition--all duration-250"
       data-collapse={istogle}
     >
       <div>
@@ -94,7 +113,7 @@ function Navebar() {
         </ul>
       </div>
       <div className={istogle?"hidden":"h-[20%]  flex items-center  justify-around w-[100%]"}>
-        <button className=" bg-slate-400 p-1 w-[40%] h-[20%] ">Login</button>
+        <button className=" bg-slate-400 p-1 w-[40%] h-[20%] " >Login</button>
         {/* <button className=" bg-slate-400 p-1 w-[40%] h-[20%]">logOut</button> */}
       </div>
     </aside>

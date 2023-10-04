@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
 function Encode() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
@@ -8,12 +8,59 @@ function Encode() {
   const [encodedImage, setEncodedImage] = useState<string | null>(null);
   const [isloading, setIsloading] = useState(false);
   const [isfinished, setisfinished] = useState(false);
+  const [sizewidthcover, setSizewidthcover] = useState(0);
+const [sizewidthhiden, setSizewidthhiden] = useState(0);
+const [sizeheightcover, setSizeheightcover] = useState(0);
+const [sizeheighthiden, setSizeheighthiden] = useState(0);
+  useEffect(()=>{
+    if (sizeheightcover!=0 && sizeheighthiden!=0) {
+      if (sizeheightcover > 2200||sizeheighthiden>2200|| sizewidthcover>2200||sizewidthhiden>2200) {
+        alert("Maximum size of the image is 2200 X 2200 ");
+        return;
+      }
+      
+      if (sizeheightcover <sizeheighthiden||sizewidthcover <sizewidthhiden) {
+        alert(`The Cover image have to biger size than heden image\n coverImage: ${sizeheightcover} X ${sizewidthcover} \n Hiden Image : ${sizeheighthiden} X ${sizewidthhiden}`);
+      return;
+      }
+  
+    }
+  },[sizewidthcover,sizewidthhiden,sizeheightcover,sizeheighthiden])
 
-  const handleCoverImageSelect = (e: any) => {
+  const handleCoverImageSelect = (e:any) => {
     console.log("change the Cover Image");
     const file = e.target.files[0];
+
     if (file) {
       setSelectedCoverImage(file);
+
+      // Create a new FileReader
+      const reader = new FileReader();
+
+      // Set up an event listener for when the FileReader has finished reading the file
+      reader.onload = (event) => {
+        if (event && event.target && typeof event.target.result === "string") {
+          // Create an image element to get the image's dimensions
+          const image = new Image();
+
+          // Set up an event listener for when the image has loaded
+          image.onload = () => {
+            // Get the width and height of the image
+            const width = image.width;
+            setSizewidthcover (width);
+            const height = image.height;
+            setSizeheightcover(height);
+            // Log the width and height
+            console.log(`Image Width: ${width}px, Height: ${height}px`);
+          };
+
+          // Set the source of the image to the data URL obtained from FileReader
+          image.src = event.target.result;
+        }
+      };
+
+      // Read the selected image as a data URL
+      reader.readAsDataURL(file);
     }
   };
 
@@ -22,6 +69,21 @@ function Encode() {
     const file = e.target.files[0];
     if (file) {
       setSelectedHiddenImage(file);
+      const reader = new FileReader()
+      reader.onload = (event) =>{
+        if(event && event.target && typeof event.target.result === "string"){
+          const image = new Image();
+          image.onload=()=>{
+            const width = image.width;
+            setSizewidthhiden(width);
+            const height = image.height;
+            setSizeheighthiden(height);
+            console.log(`Image width : ${width} px, Height : ${height}px`);
+          };
+          image.src = event.target.result;
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -75,29 +137,29 @@ function Encode() {
   const handleSaveImage = () => {
     const a = document.createElement("a");
     a.href = encodedImage!;
-    a.download = "stago-image.png";
+    a.download = "stego-image.png";
     a.click();
   };
 
   return (
     <div className=" h-screen w-full ">
-      <div className="flex h-[10%] bg-encodeTheme items-center">
+      <div className="flex h-[10%] bg-encodeTheme items-center drop-shadow-xl">
         <div className="flex text-2xl ml-5">Encode </div>
       </div>
-      <div className=" h-[90%]   flex-col lg:flex lg:flex-row bg-encodeThemedetail overflow-auto">
-        <div className="w-[100%] h-[100%] flex flex-col lg:w-[40%]  items-center justify-center  py-5">
-          <div className="flex flex-col w-[80%] h-[95%] bg-encodeTheme rounded-2xl drop-shadow-2xl">
+      <div className=" h-[90%]   flex-col lg:flex lg:flex-row bg-encodeThemedetail overflow-auto duration-250">
+        <div className="w-[100%] h-[100%] flex flex-col lg:w-[40%]  items-center justify-center  py-5 duration-250">
+          <div className="flex flex-col w-[80%] h-[95%] bg-encodeTheme rounded-2xl drop-shadow-2xl border-2 border-gray-400">
             <div className=" text-center text-xl my-5 ">Select your images</div>
             <div className="h-[50%]  flex flex-col items-center">
               <div className="flex flex-col h-[95%] w-[80%] items-center bg-white rounded-md  drop-shadow-lg">
                 <div className=" text-center my-2 text-xl">Cover Image</div>
                 <div className="w-[90%] h-[100%] m-3 flex flex-col ">
                   {selectedCoverImage && (
-                    <div className="flex justify-center w-full h-full my-auto">
+                    <div className="flex justify-center items-center w-full h-full my-auto">
                       <img
                         src={URL.createObjectURL(selectedCoverImage)}
                         alt="Sele cted Image"
-                        className="max-w-[200px] max-h-[150px] border border-red-400"
+                        className="max-w-[200px] max-h-[150px] border  border-red-400"
                       />
                     </div>
                   )}
@@ -135,8 +197,8 @@ function Encode() {
             </div>
           </div>
         </div>
-        <div className="w-[100%] lg:w-[60%] h-[100%] flex justify-center items-center">
-          <div className="h-[80%] w-[80%] bg-encodeTheme rounded-xl drop-shadow-2xl">
+        <div className="w-[100%] lg:w-[60%] h-[100%] flex justify-center items-center ">
+          <div className="h-[80%] w-[80%] bg-encodeTheme rounded-xl drop-shadow-2xl border-2 border-gray-400 ">
             <div className=" text-center my-4 text-2xl">
               Click on the Encode button
             </div>

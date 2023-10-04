@@ -70,12 +70,12 @@ function Decode() {
   };
   return (
     <div className="h-screen w-full">
-      <div className="flex h-[10%] bg-DecodeTheme items-center ">
+      <div className="flex h-[10%] bg-DecodeTheme items-center  drop-shadow-xl">
         <div className="flex text-2xl ml-5">Decode </div>
       </div>
-      <div className="flex-col lg:flex lg:flex-row lg:h-[90%] h-[90%] w-[100%] bg-[#F1D9ED] justify-around overflow-auto">
-        <div className="w-[100%] h-[70%] lg:w-[50%] lg:h-[100%]   items-center flex flex-col justify-center">
-          <div className="flex flex-col bg-DecodeTheme drop-shadow-2xl  h-[80%]   rounded-xl items-center w-[90%]">
+      <div className="flex-col lg:flex lg:flex-row lg:h-[90%] h-[90%] w-[100%] bg-[#F1D9ED] justify-around overflow-auto duration-250">
+        <div className="w-[100%] h-[70%] lg:w-[50%] lg:h-[100%]   items-center flex flex-col justify-center duration-250">
+          <div className="flex flex-col bg-DecodeTheme drop-shadow-2xl  h-[80%]   rounded-xl items-center w-[90%] border-2 border-gray-400 duration-250">
             <div className=" text-center py-4 text-2xl">
               Please select the encoded image
             </div>
@@ -100,7 +100,7 @@ function Decode() {
           </div>
         </div>
         <div className=" flex h-[100%]  drop-shadow-2xl w-[100%] lg:w-[40%] justify-center items-center">
-          <div className=" w-[90%] lg:w-[100%] h-[80%] items-center flex flex-col rounded-2xl  bg-DecodeTheme">
+          <div className=" w-[90%] lg:w-[100%] h-[80%] items-center flex flex-col rounded-2xl  bg-DecodeTheme border-2 border-gray-400">
             <div className=" h-[15%] lg:h-[10%] w-[40 %] items-center text-2xl flex justify-center ">
               Click the Decode button
             </div>
