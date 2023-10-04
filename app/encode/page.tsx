@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
+import resizeImage from "./resizeimage";
+
 function Encode() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedHiddenImage, setSelectedHiddenImage] = useState(null);
@@ -9,26 +11,48 @@ function Encode() {
   const [isloading, setIsloading] = useState(false);
   const [isfinished, setisfinished] = useState(false);
   const [sizewidthcover, setSizewidthcover] = useState(0);
-const [sizewidthhiden, setSizewidthhiden] = useState(0);
-const [sizeheightcover, setSizeheightcover] = useState(0);
-const [sizeheighthiden, setSizeheighthiden] = useState(0);
+  const [sizewidthhiden, setSizewidthhiden] = useState(0);
+  const [sizeheightcover, setSizeheightcover] = useState(0);
+  const [sizeheighthiden, setSizeheighthiden] = useState(0);
+  const test = null;
+
+  const [tempimage,setTempiamge] = useState(null);
+  const [textstatus, setTextStatus] = useState("");
+  
   useEffect(()=>{
-    if (sizeheightcover!=0 && sizeheighthiden!=0) {
-      if (sizeheightcover > 2200||sizeheighthiden>2200|| sizewidthcover>2200||sizewidthhiden>2200) {
+    setTempiamge(test);
+  },[test])
+
+  useEffect(() => {
+    if (sizeheightcover != 0 && sizeheighthiden != 0) {
+      if (
+        sizeheightcover > 2200 ||
+        sizeheighthiden > 2200 ||
+        sizewidthcover > 2200 ||
+        sizewidthhiden > 2200
+      ) {
         alert("Maximum size of the image is 2200 X 2200 ");
         return;
       }
-      
-      if (sizeheightcover <sizeheighthiden||sizewidthcover <sizewidthhiden) {
-        alert(`The Cover image have to biger size than heden image\n coverImage: ${sizeheightcover} X ${sizewidthcover} \n Hiden Image : ${sizeheighthiden} X ${sizewidthhiden}`);
-      return;
-      }
-  
-    }
-  },[sizewidthcover,sizewidthhiden,sizeheightcover,sizeheighthiden])
 
-  const handleCoverImageSelect = (e:any) => {
+      if (
+        sizeheightcover < sizeheighthiden ||
+        sizewidthcover < sizewidthhiden
+      ) {
+        alert(
+          `The hidden image cannot be bigger than the cover image\n Cover Image: ${sizeheightcover} X ${sizewidthcover} \n Hidden Image : ${sizeheighthiden} X ${sizewidthhiden}`
+        );
+        setSelectedCoverImage(null);
+        setSelectedHiddenImage(null);
+        return;
+      }
+    }
+  }, [sizewidthcover, sizewidthhiden, sizeheightcover, sizeheighthiden]);
+
+  const handleCoverImageSelect = (e: any) => {
     console.log("change the Cover Image");
+    setEncodedImage(null);
+    setisfinished(false);
     const file = e.target.files[0];
 
     if (file) {
@@ -47,7 +71,7 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
           image.onload = () => {
             // Get the width and height of the image
             const width = image.width;
-            setSizewidthcover (width);
+            setSizewidthcover(width);
             const height = image.height;
             setSizeheightcover(height);
             // Log the width and height
@@ -66,14 +90,16 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
 
   const handleHiddenImageSelect = (e: any) => {
     console.log("change the Hidden Image");
+    setEncodedImage(null);
+    setisfinished(false);
     const file = e.target.files[0];
     if (file) {
       setSelectedHiddenImage(file);
-      const reader = new FileReader()
-      reader.onload = (event) =>{
-        if(event && event.target && typeof event.target.result === "string"){
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event && event.target && typeof event.target.result === "string") {
           const image = new Image();
-          image.onload=()=>{
+          image.onload = () => {
             const width = image.width;
             setSizewidthhiden(width);
             const height = image.height;
@@ -93,14 +119,19 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
     try {
       if (!selectedCoverImage || !selectedHiddenImage) {
         alert("Please select both cover and hidden images.");
+        setIsloading(false);
+        setTextStatus("");
         return;
       }
 
+      setTextStatus("sending the Image to server...");
       // Create a FormData object to send the files
       const formData = new FormData();
       formData.append("cover_image", selectedCoverImage);
       formData.append("hidden_image", selectedHiddenImage);
-
+      setTextStatus(
+        "processing image steganography (this may take a while) ... "
+      );
       const response = await fetch("https://steganocors2.onrender.com/upload", {
         method: "POST",
         body: formData,
@@ -121,6 +152,7 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
 
       // Check if the temporary image URL is valid
       if (temporaryImageUrl) {
+        setTextStatus("send the Image to server...");
         // Set the image URL to the state variable
         setEncodedImage(temporaryImageUrl);
         setIsloading(false);
@@ -128,6 +160,8 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
       }
       console.log(imageBlob);
       console.log(imageUrl);
+      resizeImage(temporaryImageUrl,test,300,300)
+     
       alert("Images processed successfully!");
     } catch (error) {
       console.error("Error:", error);
@@ -140,9 +174,32 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
     a.download = "stego-image.png";
     a.click();
   };
+  // function resize(param) {
+  //   const imgEl = document.createElement(param);
+  //   imgEl.addEventListener('load', () => {
+  //     const resizedDataUri = resizeImage(imgEl, 300);
+  //     document.querySelector('#img-preview')!.src = resizedDataUri;
+  //     settest(resizedDataUri);
+  //   });
+  // }
+  
+
+  // function resizeImage(imgEl, wantedWidth) {
+  //   const canvas = document.createElement('canvas');
+  //   const ctx = canvas.getContext('2d');
+
+  //   const aspect = imgEl.width / imgEl.height;
+
+  //   canvas.width = wantedWidth;
+  //   canvas.height = wantedWidth / aspect;
+
+  //   ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+  //   return canvas.toDataURL();
+  // }
 
   return (
     <div className=" h-screen w-full ">
+
       <div className="flex h-[10%] bg-encodeTheme items-center drop-shadow-xl">
         <div className="flex text-2xl ml-5">Encode </div>
       </div>
@@ -203,11 +260,12 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
               Click on the Encode button
             </div>
 
-            <div className="flex h-[70%] justify-center">
-              <div className="w-[70%] bg-slate-400">
+            <div className="flex h-[75%] justify-center">
+              <div className="w-[85%] bg-slate-400">
                 {isloading ? (
-                  <div className=" w-full h-full flex items-center justify-center">
+                  <div className=" w-full h-full flex flex-col items-center justify-center">
                     <Spinner />
+                    <div>{textstatus}</div>
                   </div>
                 ) : null}
 
@@ -216,7 +274,7 @@ const [sizeheighthiden, setSizeheighthiden] = useState(0);
                     <img
                       src={encodedImage}
                       alt="Encoded Image"
-                      className="max-w-[90%] max-h-[90%] border border-red-400"
+                      className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400   "
                     />
                   </div>
                 )}

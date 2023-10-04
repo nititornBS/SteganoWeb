@@ -6,6 +6,7 @@ function Decode() {
   const [DecodeImage, setDecodeImage] = useState<string | null>(null);
   const [isfinished, setisfinished] = useState(false);
   const [isloading, setIsloading] = useState(false);
+  const [textstetus,settextstetus] = useState("");
   const handletheEncodeimage = (e: any) => {
     console.log("the value of Encode Image is changed.");
     const file = e.target.files[0];
@@ -22,7 +23,8 @@ function Decode() {
   };
 
   const handleSubmit = async () => {
-    console.log("send teh data to the server");
+    // console.log("send data to the server");
+    settextstetus("sending images to the server...");
     setIsloading(true);
     try {
       if (!selectedEncodeImage) {
@@ -33,7 +35,7 @@ function Decode() {
       // Create a FormData object to send the files
       const formData = new FormData();
       formData.append("cover_image", selectedEncodeImage);
-
+      settextstetus("processing image steganography (this may take a while) ... ");
       const response = await fetch("https://steganocors2.onrender.com/decode", {
         method: "POST",
         body: formData,
@@ -85,7 +87,7 @@ function Decode() {
                   <img
                     src={URL.createObjectURL(selectedEncodeImage)}
                     alt="Selected Image"
-                    className="max-w-[90%] max-h-[90%] border border-red-400"
+                    className="  max-w-[95%] max-h-[95%] border border-red-400"
                   />
                 </div>
               )}
@@ -108,6 +110,7 @@ function Decode() {
             {isloading ? (
                   <div className=" w-full h-full flex items-center justify-center">
                     <Spinner />
+                    <div>{textstetus}</div>
                   </div>
                 ) : null}
               {DecodeImage && (
