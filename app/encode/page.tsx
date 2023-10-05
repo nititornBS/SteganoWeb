@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
-// import resizeImage from "./resizeimage";
+import resizeImage from "./resizeimage";
 
 function Encode() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
@@ -160,9 +160,9 @@ function Encode() {
       }
       console.log(imageBlob);
       console.log(imageUrl);
-      // resizeImage(temporaryImageUrl,test,300,300);
-      const resizedUri = resizeImage2(temporaryImageUrl, 300);
-     
+      const smallimage = resizeImage(temporaryImageUrl,test,300,300);
+      console.log(smallimage);
+      
       alert("Images processed successfully!");
     } catch (error) {
       console.error("Error:", error);
@@ -184,18 +184,18 @@ function Encode() {
   //   });
   // }
 
-function resizeImage2(imgEl, wantedWidth) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+  // function resizeImage2(imgEl, wantedWidth) {
+  //   const canvas = document.createElement('canvas');
+  //   const ctx = canvas.getContext('2d');
 
-    const aspect = imgEl.width / imgEl.height;
+  //   const aspect = imgEl.width / imgEl.height;
 
-    canvas.width = wantedWidth;
-    canvas.height = wantedWidth / aspect;
+  //   canvas.width = wantedWidth;
+  //   canvas.height = wantedWidth / aspect;
 
-    ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL();
-   }
+  //   ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+  //   return canvas.toDataURL();
+  //  }
 
   return (
     <div className=" h-screen w-full ">
