@@ -1,4 +1,4 @@
-"use client";
+ode"use client";
 
 import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
@@ -272,7 +272,7 @@ function Encode() {
                 {encodedImage && (
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
-                      src={selectedCoverImage}
+                      src={encodedImage}
                       alt="Encoded Image"
                       className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400"
                     />
