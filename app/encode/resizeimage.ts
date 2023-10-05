@@ -13,7 +13,7 @@ export default function resizeImageAndSave(
     resizeWidth?: number | null,
     resizeHeight?: number | null,
     outputFileName: string = "resized_image.png"
-):  Promise<void> {
+): Promise<void> {
     return new Promise((resolve, reject) => {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
