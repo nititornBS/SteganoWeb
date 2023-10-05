@@ -75,7 +75,7 @@ export default function resizeImageAndSave(
                     //link.click();
 
                     // Clean up
-                    URL.revokeObjectURL(blobUrl);
+                    //URL.revokeObjectURL(blobUrl);
 
                     resolve();
                 } else {
