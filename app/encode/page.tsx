@@ -272,7 +272,8 @@ function Encode() {
                 {encodedImage && (
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
-                      src={encodedImage}
+                      //src={encodedImage}
+                      src={resizeImage(temporaryImageUrl,test,300,300)}
                       alt="Encoded Image"
                       className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400   "
                     />
