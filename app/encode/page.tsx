@@ -160,7 +160,7 @@ function Encode() {
       }
       console.log(imageBlob);
       console.log(imageUrl);
-      setTempimage(resizeImage(temporaryImageUrl,test,300,300));
+      tempimage = resizeImage(temporaryImageUrl,test,300,300);
      
       alert("Images processed successfully!");
     } catch (error) {
