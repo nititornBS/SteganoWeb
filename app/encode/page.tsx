@@ -161,7 +161,7 @@ function Encode() {
       console.log(imageBlob);
       console.log(imageUrl);
       const smallimage = await resizeImage(temporaryImageUrl,test,300,300);
-      setTempimage(smallimage);
+      //setTempimage(smallimage);
      
       alert("Images processed successfully!");
     } catch (error) {
