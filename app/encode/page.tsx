@@ -161,8 +161,7 @@ function Encode() {
       console.log(imageBlob);
       console.log(imageUrl);
       const smallimage = resizeImage(temporaryImageUrl,300,300);
-      const newUrl = await URL.createObjectURL(smallimage);
-      console.log(newUrl);
+      //console.log(smallimage);
       
       alert("Images processed successfully!");
     } catch (error) {
