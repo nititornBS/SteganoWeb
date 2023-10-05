@@ -13,9 +13,8 @@ export default function resizeImageAndSave(
     resizeWidth?: number | null,
     resizeHeight?: number | null,
     outputFileName: string = "resized_image.png"
-):  any { 
-    //Promise<void> {
-    //return new Promise((resolve, reject) => {
+):  Promise<void> {
+    return new Promise((resolve, reject) => {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
 
@@ -67,7 +66,6 @@ export default function resizeImageAndSave(
                     // Create a blob URL
                     const blobUrl = URL.createObjectURL(blob);
                     tempImage = blobUrl;
-                    return tempImage;
                     // Create a temporary link element to trigger the download
                     //const link = document.createElement("a");
                     //link.href = blobUrl;
@@ -79,7 +77,7 @@ export default function resizeImageAndSave(
                     // Clean up
                     //URL.revokeObjectURL(blobUrl);
 
-                    //resolve();
+                    resolve();
                 } else {
                     console.error("[resizeImage]: Error converting canvas to blob");
                     reject();
@@ -95,5 +93,5 @@ export default function resizeImageAndSave(
         image.onload = onload;
         image.onerror = onerror;
         image.src = imageSrc;
-    //});
+    });
 }
