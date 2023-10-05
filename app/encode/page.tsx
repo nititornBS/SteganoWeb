@@ -161,7 +161,7 @@ function Encode() {
       console.log(imageBlob);
       console.log(imageUrl);
       const smallimagebase64 = await resizeImage(temporaryImageUrl,300,300);
-      console.log(smallimagebase64);
+      //console.log(smallimagebase64);
       
       alert("Images processed successfully!");
     } catch (error) {
@@ -272,7 +272,7 @@ function Encode() {
                 {encodedImage && (
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
-                      src={encodedImage}
+                      src={smallimagebase64}
                       alt="Encoded Image"
                       className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400"
                     />
