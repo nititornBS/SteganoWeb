@@ -1,4 +1,4 @@
-ode"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
