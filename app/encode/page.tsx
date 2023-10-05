@@ -18,7 +18,7 @@ function Encode() {
 
   const [tempimage,setTempimage] = useState(null);
   const [textstatus, setTextStatus] = useState("");
-  const [smallImage, setSmallImage] = useState<string | null>(null);
+  const [resizedImage, setResizedImage] = useState<string | null>(null);
   
   useEffect(()=>{
     setTempimage(test);
@@ -162,7 +162,7 @@ function Encode() {
       console.log(imageBlob);
       console.log(imageUrl);
       const smallimage = await resizeImage(temporaryImageUrl,test,300,300);
-      setSmallImage(smallimage);
+      setResizedImage(smallimage);
      
       alert("Images processed successfully!");
     } catch (error) {
