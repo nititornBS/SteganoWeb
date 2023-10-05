@@ -67,12 +67,12 @@ export default function resizeImageAndSave(
                     const blobUrl = URL.createObjectURL(blob);
                     tempImage = blobUrl;
                     // Create a temporary link element to trigger the download
-                    const link = document.createElement("a");
-                    link.href = blobUrl;
-                    link.download = outputFileName;
+                    //const link = document.createElement("a");
+                    //link.href = blobUrl;
+                    //link.download = outputFileName;
 
                     // Trigger the download
-                    link.click();
+                    //link.click();
 
                     // Clean up
                     URL.revokeObjectURL(blobUrl);
