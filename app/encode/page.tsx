@@ -4,6 +4,19 @@ import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
 // import resizeImage from "./resizeimage";
 
+function resizeImage(imgEl, wantedWidth) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const aspect = imgEl.width / imgEl.height;
+
+    canvas.width = wantedWidth;
+    canvas.height = wantedWidth / aspect;
+
+    ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL();
+   }
+
 function Encode() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedHiddenImage, setSelectedHiddenImage] = useState(null);
@@ -183,20 +196,6 @@ function Encode() {
   //     settest(resizedDataUri);
   //   });
   // }
-  
-
-  function resizeImage(imgEl, wantedWidth) {
-     const canvas = document.createElement('canvas');
-     const ctx = canvas.getContext('2d');
-
-     const aspect = imgEl.width / imgEl.height;
-
-     canvas.width = wantedWidth;
-     canvas.height = wantedWidth / aspect;
-
-     ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
-     return canvas.toDataURL();
-   }
 
   return (
     <div className=" h-screen w-full ">
