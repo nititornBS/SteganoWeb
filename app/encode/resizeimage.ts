@@ -9,7 +9,7 @@
  */
 export default function resizeImageAndSave(
     imageSrc: string,
-    tempImage:any,
+    tempImage: any,
     resizeWidth?: number | null,
     resizeHeight?: number | null,
     outputFileName: string = "resized_image.png"
