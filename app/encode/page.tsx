@@ -18,7 +18,6 @@ function Encode() {
 
   const [tempimage,setTempimage] = useState(null);
   const [textstatus, setTextStatus] = useState("");
-  const [smallImage, setSmallImage] = useState<string | null>(null);
   
   useEffect(()=>{
     setTempimage(test);
@@ -162,8 +161,7 @@ function Encode() {
       console.log(imageBlob);
       console.log(imageUrl);
       const smallimagebase64 = await resizeImage(temporaryImageUrl,300,300);
-      //console.log(smallimagebase64);
-      setSmallImage(smallimagebase64);
+      console.log(smallimagebase64);
       
       alert("Images processed successfully!");
     } catch (error) {
@@ -271,10 +269,10 @@ function Encode() {
                   </div>
                 ) : null}
 
-                {encodedImage && (
+                {smallimagebase64 && (
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
-                      src={smallImage}
+                      src={smallimagebase64}
                       alt="Encoded Image"
                       className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400"
                     />
