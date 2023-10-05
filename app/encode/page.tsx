@@ -162,7 +162,7 @@ function Encode() {
       console.log(imageUrl);
       const smallimage = resizeImage(temporaryImageUrl,test,300,300);
       const link = document.createElement("a");
-      link.href = blobUrl;
+      link.href = smallimage;
       link.download = "tes1t.png";
       link.click();
       
