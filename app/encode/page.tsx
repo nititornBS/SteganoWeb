@@ -160,7 +160,7 @@ function Encode() {
       }
       console.log(imageBlob);
       console.log(imageUrl);
-     // resizeImage(temporaryImageUrl,test,300,300)
+      resizedImage = resizeImage(temporaryImageUrl,test,300,300)
      
       alert("Images processed successfully!");
     } catch (error) {
@@ -273,7 +273,7 @@ function Encode() {
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
                       //src={encodedImage}
-                      src={resizeImage(temporaryImageUrl,test,300,300)}
+                      src={resizedImage}
                       alt="Encoded Image"
                       className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400   "
                     />
