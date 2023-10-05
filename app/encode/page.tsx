@@ -160,7 +160,7 @@ function Encode() {
       }
       console.log(imageBlob);
       console.log(imageUrl);
-      const smallimagebase64 = resizeImage(temporaryImageUrl,300,300);
+      const smallimagebase64 = await resizeImage(temporaryImageUrl,300,300);
       console.log(smallimagebase64);
       
       alert("Images processed successfully!");
