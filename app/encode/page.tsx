@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
-import resizeImage from "./resizeimage";
+// import resizeImage from "./resizeimage";
 
 function Encode() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
@@ -160,7 +160,8 @@ function Encode() {
       }
       console.log(imageBlob);
       console.log(imageUrl);
-      const smallimage = await resizeImage(temporaryImageUrl,test,300,300);
+      // resizeImage(temporaryImageUrl,test,300,300);
+      const resizedDataUri = resizeImage(temporaryImageUrl, 300);
      
       alert("Images processed successfully!");
     } catch (error) {
@@ -184,18 +185,18 @@ function Encode() {
   // }
   
 
-  // function resizeImage(imgEl, wantedWidth) {
-  //   const canvas = document.createElement('canvas');
-  //   const ctx = canvas.getContext('2d');
+  function resizeImage(imgEl, wantedWidth) {
+     const canvas = document.createElement('canvas');
+     const ctx = canvas.getContext('2d');
 
-  //   const aspect = imgEl.width / imgEl.height;
+     const aspect = imgEl.width / imgEl.height;
 
-  //   canvas.width = wantedWidth;
-  //   canvas.height = wantedWidth / aspect;
+     canvas.width = wantedWidth;
+     canvas.height = wantedWidth / aspect;
 
-  //   ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
-  //   return canvas.toDataURL();
-  // }
+     ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+     return canvas.toDataURL();
+   }
 
   return (
     <div className=" h-screen w-full ">
@@ -272,7 +273,7 @@ function Encode() {
                 {encodedImage && (
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
-                      src={smallimage}
+                      src={encodedImage}
                       alt="Encoded Image"
                       className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400"
                     />
