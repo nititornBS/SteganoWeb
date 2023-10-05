@@ -115,6 +115,7 @@ function Encode() {
   };
 
   const handleSubmit = async () => {
+    setResizedImage(null);
     console.log("Fetching now.... ");
     setIsloading(true);
     try {
