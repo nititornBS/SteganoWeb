@@ -68,6 +68,8 @@ function Decode() {
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while processing images.");
+      setisfinished(true);
+      setIsloading(false);
     }
   };
   return (
