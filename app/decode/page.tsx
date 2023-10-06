@@ -35,7 +35,7 @@ function Decode() {
       // Create a FormData object to send the files
       const formData = new FormData();
       formData.append("cover_image", selectedEncodeImage);
-      settextstetus("processing image steganography (this may take a while) ... ");
+      settextstetus("Processing image steganography (this may take a while) ... ");
       const response = await fetch("https://steganocors2.onrender.com/decode", {
         method: "POST",
         body: formData,
