@@ -164,7 +164,7 @@ function Encode() {
           const resizedImageUrl = canvas.toDataURL("image/png");
           setEncodedImage2(resizedImageUrl);
           // Set the resized image URL to the state variable
-          setEncodedImage(resizedImageUrl);
+          setEncodedImage(imageUrl);
           setIsloading(false);
           setisfinished(true);
         };
@@ -267,7 +267,7 @@ function Encode() {
                     <img
                       src={encodedImage2}
                       alt="Encoded Image"
-                      className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400   "
+                      className=" object-scale-down max-w-[95%] min-h-[90%] max-h-[95%]  "
                     />
                   </div>
                 )}
