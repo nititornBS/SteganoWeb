@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Spinner } from "@nextui-org/react";
-import resizeImage from "./resizeimage";
+
 
 function Encode() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedHiddenImage, setSelectedHiddenImage] = useState(null);
   const [encodedImage, setEncodedImage] = useState<string | null>(null);
+  const [encodedImage2, setEncodedImage2] = useState<string | null>(null);
   const [isloading, setIsloading] = useState(false);
   const [isfinished, setisfinished] = useState(false);
   const [sizewidthcover, setSizewidthcover] = useState(0);
@@ -16,12 +17,11 @@ function Encode() {
   const [sizeheighthiden, setSizeheighthiden] = useState(0);
   const test = null;
 
-  const [tempimage,setTempimage] = useState(null);
+  const [tempimage,setTempiamge] = useState(null);
   const [textstatus, setTextStatus] = useState("");
-  const [encodedImage2, setEncodedImage2] = useState<string | null>(null);
   
   useEffect(()=>{
-    setTempimage(test);
+    setTempiamge(test);
   },[test])
 
   useEffect(() => {
@@ -124,80 +124,71 @@ function Encode() {
         setTextStatus("");
         return;
       }
-
-      setTextStatus("sending the Image to server...");
-      // Create a FormData object to send the files
+  
+      setTextStatus("Sending the image to the server...");
       const formData = new FormData();
       formData.append("cover_image", selectedCoverImage);
       formData.append("hidden_image", selectedHiddenImage);
-      setTextStatus(
-        "processing image steganography (this may take a while) ... "
-      );
+      setTextStatus("Processing image steganography (this may take a while)...");
+  
       const response = await fetch("https://steganocors2.onrender.com/upload", {
         method: "POST",
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error(
           `Failed to process images: ${response.status} ${response.statusText}`
         );
       }
       const imageBlob = await response.blob();
-
-      // Create a data URL from the Blob
+  
       const imageUrl = await URL.createObjectURL(imageBlob);
-
-      // Set the temporary image URL in a variable
-      const temporaryImageUrl = await imageUrl;
-
-      // Check if the temporary image URL is valid
-      if (temporaryImageUrl) {
-        setTextStatus("send the image to server...");
-        // Set the image URL to the state variable
-        setEncodedImage(temporaryImageUrl);
-        setIsloading(false);
-        setisfinished(true);
+  
+      if (imageUrl) {
+        setTextStatus("Sending the image to the server...");
+  
+        // Create a duplicate of the encoded image
+        const duplicateImage = new Image();
+        duplicateImage.src = imageUrl;
+  
+        duplicateImage.onload = () => {
+          // Create a canvas element to resize the image
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = 300;
+          canvas.height = 300;
+          ctx!.drawImage(duplicateImage, 0, 0, 300, 300);
+  
+          // Get the resized image as a data URL
+          const resizedImageUrl = canvas.toDataURL("image/png");
+          setEncodedImage2(resizedImageUrl);
+          // Set the resized image URL to the state variable
+          setEncodedImage(resizedImageUrl);
+          setIsloading(false);
+          setisfinished(true);
+        };
       }
+  
       console.log(imageBlob);
       console.log(imageUrl);
-      const smallimagebase64 = await resizeImage(temporaryImageUrl,300,300);
-      console.log(smallimagebase64);
-      setEncodeImage2(smallimagebase64)
-      
+  
       alert("Images processed successfully!");
     } catch (error) {
       console.error("Error:", error);
+      setisfinished(true);
+      setIsloading(false);
       alert("An error occurred while processing images.");
     }
   };
+  
   const handleSaveImage = () => {
     const a = document.createElement("a");
     a.href = encodedImage!;
     a.download = "stego-image.png";
     a.click();
   };
-  // function resize(param) {
-  //   const imgEl = document.createElement(param);
-  //   imgEl.addEventListener('load', () => {
-  //     const resizedDataUri = resizeImage(imgEl, 300);
-  //     document.querySelector('#img-preview')!.src = resizedDataUri;
-  //     settest(resizedDataUri);
-  //   });
-  // }
-
-  // function resizeImage2(imgEl, wantedWidth) {
-  //   const canvas = document.createElement('canvas');
-  //   const ctx = canvas.getContext('2d');
-
-  //   const aspect = imgEl.width / imgEl.height;
-
-  //   canvas.width = wantedWidth;
-  //   canvas.height = wantedWidth / aspect;
-
-  //   ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
-  //   return canvas.toDataURL();
-  //  }
+ 
 
   return (
     <div className=" h-screen w-full ">
@@ -217,7 +208,7 @@ function Encode() {
                     <div className="flex justify-center items-center w-full h-full my-auto">
                       <img
                         src={URL.createObjectURL(selectedCoverImage)}
-                        alt="Selected Image"
+                        alt="Sele cted Image"
                         className="max-w-[200px] max-h-[150px] border  border-red-400"
                       />
                     </div>
@@ -270,20 +261,20 @@ function Encode() {
                     <div>{textstatus}</div>
                   </div>
                 ) : null}
-
+{/* test */}
                 {encodedImage2 && (
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
                       src={encodedImage2}
                       alt="Encoded Image"
-                      className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400"
+                      className=" object-scale-down max-w-[95%] max-h-[95%] border border-red-400   "
                     />
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="h-[20%] flex items-center justify-center">
+            <div className=" p-3 lg:p-4  flex items-center justify-center">
               {isfinished ? (
                 <button
                   id="encodeButton"
