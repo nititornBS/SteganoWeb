@@ -156,9 +156,9 @@ function Encode() {
           // Create a canvas element to resize the image
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
-          canvas.width = 300;
-          canvas.height = 300;
-          ctx!.drawImage(duplicateImage, 0, 0, 300, 300);
+          canvas.width = (sizewidthcover/sizeheightcover)*400 ;
+          canvas.height = 400;
+          ctx!.drawImage(duplicateImage, 0, 0, (sizewidthcover/sizeheightcover)*400, 400);
   
           // Get the resized image as a data URL
           const resizedImageUrl = canvas.toDataURL("image/png");
@@ -267,7 +267,7 @@ function Encode() {
                     <img
                       src={encodedImage2}
                       alt="Encoded Image"
-                      className=" object-scale-down max-w-[95%] min-h-[90%] max-h-[95%]  "
+                      className=" object-scale-down max-w-[95%] min-h-[95%] max-h-[95%]  "
                     />
                   </div>
                 )}
