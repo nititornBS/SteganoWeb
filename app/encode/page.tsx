@@ -191,8 +191,7 @@ function Encode() {
  
 
   return (
-    <div className=" h-screen w-full ">
-
+    <div className=" h-screen w-full duration-250 ">
       <div className="flex h-[10%] bg-encodeTheme items-center drop-shadow-xl">
         <div className="flex text-2xl ml-5">Encode </div>
       </div>
@@ -261,7 +260,7 @@ function Encode() {
                     <div>{textstatus}</div>
                   </div>
                 ) : null}
-{/* test */}
+                {/* test */}
                 {encodedImage2 && (
                   <div className=" flex h-[100%] items-center justify-center">
                     <img
@@ -279,7 +278,7 @@ function Encode() {
                 <button
                   id="encodeButton"
                   onClick={handleSaveImage}
-                  className="h-[30%] w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700 "
+                  className=" transition h-[30%] w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700 "
                 >
                   <div>Download</div>
                 </button>
@@ -287,7 +286,7 @@ function Encode() {
                 <button
                   id="encodeButton"
                   onClick={handleSubmit}
-                  className="h-[30%] w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700 "
+                  className=" transition  h-[30%] w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700 "
                 >
                   <div>Encode</div>
                 </button>
