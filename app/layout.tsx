@@ -1,6 +1,7 @@
 "use client";
 import "./globals.css";
 import Navebar from "./component/Navebar";
+import { AuthContextProvider } from "./context/AuthContext";
 
 export default function RootLayout({
   children,
@@ -12,14 +13,14 @@ export default function RootLayout({
       <head></head>
       <body>
         <div className="flex">
-      
-          <Navebar />
-          <div className="flex flex-col w-full h-full">
-            <div className="w-full h-full">{children}</div>
-          </div>
-        
+          <AuthContextProvider>
+            <Navebar />
+            
+            <div className="flex flex-col w-full h-full">
+              <div className="w-full h-full">{children}</div>
+            </div>
+          </AuthContextProvider>
         </div>
-
       </body>
     </html>
   );
