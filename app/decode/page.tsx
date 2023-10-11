@@ -73,7 +73,7 @@ function Decode() {
     }
   };
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full duration-250 ">
       <div className="flex h-[10%] bg-DecodeTheme items-center  drop-shadow-xl">
         <div className="flex text-2xl ml-5">Decode </div>
       </div>
@@ -100,7 +100,6 @@ function Decode() {
               onChange={handletheEncodeimage}
               className="block  mt-3 w-[40%] text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 "
             />
-            
           </div>
         </div>
         <div className=" flex h-[100%]  drop-shadow-2xl w-[100%] lg:w-[40%] justify-center items-center">
@@ -109,12 +108,12 @@ function Decode() {
               Click the Decode button
             </div>
             <div className=" border-2 w-[75%]  justify-center items-center bg-white drop-shadow-xl h-[60%] flex">
-            {isloading ? (
-                  <div className=" w-full h-full flex-col flex items-center justify-center">
-                    <Spinner />
-                    <div>{textstetus}</div>
-                  </div>
-                ) : null}
+              {isloading ? (
+                <div className=" w-full h-full flex-col flex items-center justify-center">
+                  <Spinner />
+                  <div>{textstetus}</div>
+                </div>
+              ) : null}
               {DecodeImage && (
                 <div className="flex h-[100%] w-[100%] items-center justify-center">
                   <img
@@ -125,17 +124,19 @@ function Decode() {
                 </div>
               )}
             </div>
-            {isfinished ? null : <div
-              className="h-[7%] m-auto w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700"
-              onClick={handleSubmit}
-            >
-              <button>Decode</button>
-            </div>}
+            {isfinished ? null : (
+              <div
+                className=" transition h-[7%] m-auto w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700"
+                onClick={handleSubmit}
+              >
+                <button>Decode</button>
+              </div>
+            )}
             {isfinished ? (
               <button
                 id="encodeButton"
-                onClick={handleSaveImage}
-                className="h-[7%] m-auto w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700"
+                onClick={handleSubmit}
+                className=" transition  h-[30%] w-[40%] flex justify-center items-center rounded-lg  bg-white  shadow-2xl hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-700 "
               >
                 <div>Download</div>
               </button>
