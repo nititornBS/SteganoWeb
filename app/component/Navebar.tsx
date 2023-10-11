@@ -9,35 +9,45 @@ import icontext from "public/TextToImage.svg";
 import iconarrow from "public/arrow_left.svg";
 import { useEffect, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
-
+import { Spinner } from "@nextui-org/react";
 
 function Navebar() {
-  // const { user, googleSignIn, logOut } = UserAuth();
-  // const [loading, setLoading] = useState(true);
+  const { user, googleSignIn, logOut } = UserAuth();
+  console.log(user);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      setLoading(false);
+    };
+    checkAuthentication();
+  }, [user]);
+  const handleSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const handleSignIn = async () => {
-  //   try {
-  //     await googleSignIn();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const handleSignOut = async () => {
-  //   try {
-  //     await logOut();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      setLoading(false);
+    };
+    checkAuthentication();
+  }, [user]);
+  // const {user,usersurname} = UserAuth();
 
-  // useEffect(() => {
-  //   const checkAuthentication = async () => {
-  //     await new Promise((resolve) => setTimeout(resolve, 50));
-  //     setLoading(false);
-  //   };
-  //   checkAuthentication();
-  // }, [user]);
+  // console.log(user);
 
   const sidebarItem = [
     {
@@ -50,11 +60,7 @@ function Navebar() {
       href: "/decode",
       icon: iconencode,
     },
-    {
-      name: "Text-to-Image",
-      href: "/TextToImage",
-      icon: icontext,
-    },
+  
   ];
   const [istogle, settogle] = useState<boolean>(true);
 
@@ -62,12 +68,11 @@ function Navebar() {
     settogle((prev) => !prev);
   };
   return (
-    
     <aside
       className="flex flex-col w-[10%] h-screen border-2 border-gray-500 gap-1 justify-between transition--all duration-250"
       data-collapse={istogle}
     >
-      <div>
+      <div className="">
         <div className="flex mx-5 mt-3 pb-3   items-center border-2  border-x-0  border-t-0 border-b-orange-400">
           <Link href={"/"} className=" w-[100%] h-[100%]">
             <Image src={Logo} width={50} height={50} alt="" className="my-2" />
@@ -94,11 +99,11 @@ function Navebar() {
             </button>
           </div>
         </div>
-        <ul className="mx-5 gap-5 flex flex-col">
+        <ul className=" gap-5 flex items-center flex-col w-[100%] ">
           {sidebarItem.map(({ name, href, icon }) => (
             <li
               key={name}
-              className="border  bg-slate-200 border-r-4  rounded-xl"
+              className="border duration-150  bg-slate-200  w-[85%] hover:w-[95%] rounded-xl hover:bg-blue-500"
             >
               <Link href={href} className="flex h-[100%] p-2">
                 <div className="flex  items-center">
@@ -110,11 +115,63 @@ function Navebar() {
               </Link>
             </li>
           ))}
+          {user ? (
+            <div className="border duration-150  bg-slate-200  w-[85%] hover:w-[95%] rounded-xl hover:bg-blue-500">
+              <Link href="/TextToImage" className="flex h-[100%] p-2">
+                <div className="flex  items-center">
+                  <Image src={icontext} width={24} height={24} alt="" />
+                  <span className={istogle ? "hidden" : "sideBarName"}>
+                    Text-to-Image
+                  </span>
+                </div>
+              </Link>
+            </div>
+          ) : (
+            <div className="border duration-150  bg-slate-200  w-[85%] hover:w-[95%] rounded-xl hover:bg-blue-500">
+              <button className="flex h-[100%] p-2" onClick={()=>{alert("Please login to unlock this feature.");}}>
+                  <div className="flex  items-center">
+                    <Image src={icontext} width={24} height={24} alt="" />
+                    <span className={istogle ? "hidden" : "sideBarName"}>
+                      Text-to-Image
+                    </span>
+                  </div>
+       
+              </button>
+            </div>
+          )}
         </ul>
       </div>
-      <div className={istogle?"hidden":"h-[20%]  flex items-center  justify-around w-[100%]"}>
-        <button className=" bg-slate-400 p-1 w-[40%] h-[20%] " >Login</button>
-        {/* <button className=" bg-slate-400 p-1 w-[40%] h-[20%]">logOut</button> */}
+      <div
+        className={
+          istogle
+            ? "hidden"
+            : "h-[20%]  flex items-center  justify-around w-[100%]"
+        }
+      >
+        {user ? (
+          <div className="w-full h-auto flex items-center flex-col">
+            <div className="p-4 flex flex-col items-center bg-slate-200">
+              {loading ? (
+                <Spinner />
+              ) : user ? (
+                <p className=" py-3">Welcome, {user.displayName}</p>
+              ) : null}
+              <button
+                className=" bg-slate-400 p-1 w-[40%] h-[20%] hover:bg-blue-500 transition"
+                onClick={handleSignOut}
+              >
+                logout
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            className=" bg-slate-400 p-1 w-[40%] h-[20%] hover:bg-blue-500 transition  "
+            onClick={handleSignIn}
+          >
+            Login
+          </button>
+        )}
       </div>
     </aside>
   );
