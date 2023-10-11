@@ -1,3 +1,4 @@
+"use client";
 import "./globals.css";
 import Image from "next/image";
 import Logo from "../public/logo.png";
@@ -5,8 +6,9 @@ import Link from "next/link";
 import icondecode from "../public/decode.svg";
 import iconencode from "../public/encode.svg";
 import icontext from "../public/TextToImage.svg";
-
+import { UserAuth } from "./context/AuthContext";
 function page() {
+  const { user, googleSignIn, logOut } = UserAuth();
   const sidebarItem = [
     {
       name: "Encode",
@@ -18,14 +20,9 @@ function page() {
       href: "/decode",
       icon: iconencode,
     },
-    {
-      name: "Text-to-Image",
-      href: "/TextToImage",
-      icon: icontext,
-    },
   ];
   return (
-    <div className=" h-screen w-full bg-green  flex justify-center items-center  bg-gray-400 ">
+    <div className=" h-screen w-full bg-green  flex justify-center items-center  bg-gray-400  duration-250">
       <div className=" w-[80%] h-[70%] flex-col flex justify-center items-center bg-white rounded-lg drop-shadow-2xl">
         <div className="flex-col w-[90%] items-center justify-center lg:flex lg:flex-row">
           <div className="w-[100%] flex justify-center items-center">
@@ -41,7 +38,7 @@ function page() {
                 {sidebarItem.map(({ name, href, icon }) => (
                   <li
                     key={name}
-                    className="border  w-[200px] h-[100px] text-xl drop-shadow-lg  bg-slate-400 border-r-4  rounded-xl"
+                    className="border  w-[200px] h-[100px] text-xl drop-shadow-lg  bg-slate-400 border-r-4  rounded-xl hover:bg-blue-500 transition"
                   >
                     <Link
                       href={href}
@@ -54,6 +51,35 @@ function page() {
                     </Link>
                   </li>
                 ))}
+                {user ? (
+                  <div className="border  w-[200px] h-[100px] text-xl drop-shadow-lg  bg-slate-400 border-r-4  rounded-xl hover:bg-blue-500 transition">
+                    <Link
+                      href="/TextToImage"
+                      className="flex flex-col items-center justify-center h-[100%] p-2 "
+                      onClick={() => {
+                        user
+                          ? null
+                          : alert("Please select the encoded images.");
+                      }}
+                    >
+                      <span className="sideBarName">Text-to-Image</span>
+                      <div className="flex  items-center">
+                        <Image src={icontext} width={24} height={24} alt="" />
+                      </div>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="border  w-[200px] h-[100px] text-xl drop-shadow-lg  bg-slate-400 border-r-4 flex justify-center  rounded-xl hover:bg-blue-500 transition">
+                    <button className="flex flex-col items-center justify-center h-[100%] p-2" onClick={()=>{alert("Please login to unlock this feature.");}}>
+                     
+                        <span className="sideBarName">Text-to-Image</span>
+                        <div className="flex  items-center">
+                          <Image src={icontext} width={24} height={24} alt="" />
+                        </div>
+                     
+                    </button>
+                  </div>
+                )}
               </ul>
             </div>
           </div>
